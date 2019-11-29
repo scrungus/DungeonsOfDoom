@@ -1,3 +1,4 @@
+//package src;
 /**
  * Reads and contains in memory the map of the game.
  *

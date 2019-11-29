@@ -1,3 +1,8 @@
+//package src;
+//import src.Map;
+
+import java.util.Arrays;
+
 /**
  * Contains the main logic part of the game, as it processes.
  *
@@ -10,7 +15,11 @@ public class GameLogic {
 	 * Default constructor
 	 */
 	public GameLogic() {
-		map = new Map();
+        map = new Map();
+        for(int i = 0; i < map.getMap().length;i++){
+            System.out.println(Arrays.toString(map.getMap()[i]));
+        }
+        
 	}
 
     /**
