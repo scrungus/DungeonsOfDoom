@@ -1,6 +1,4 @@
-package src;
-
-import src.GameComponent.GameLogic;
+import gamecomp.GameLogic;
 
 /**
  * Main
@@ -8,6 +6,7 @@ import src.GameComponent.GameLogic;
 public class Main {
 
     public static void main(String[] args) {
-		GameLogic logic = new GameLogic();
+      GameLogic logic = new GameLogic();
+      logic.startGame();
     }
 }
