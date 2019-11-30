@@ -90,8 +90,12 @@ public class Map {
 		validDirections.add(new Pair<>("E", new Pair<>(1,0)));
 	}
 
-	public List<Pair<String,Pair<Integer,Integer>>> getValidDirections(){
-		return validDirections;
+	public List<String> getValidDirections(){
+		List<String> directions = new ArrayList<>();
+		for(Pair<String,Pair<Integer,Integer>> direction : validDirections){
+			directions.add(direction.key);
+		}
+		return directions;
 	}
 
 }

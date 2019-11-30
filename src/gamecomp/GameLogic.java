@@ -34,7 +34,6 @@ public class GameLogic {
         display.startScreen();
         display.map(map.getMap());
         addValidMoves();
-        addValidDirections();
         getMove("Your move : ");
     }
 
@@ -43,8 +42,8 @@ public class GameLogic {
         System.out.println(movePrompt);
         while(true){
             try {
-                final String line = reader.readLine();
-                line.trim();
+                String line = reader.readLine();
+                line = line.trim().toUpperCase();
                 final String[] input = line.split(" ");
                 if(checkMove(input)){
                    return input;
@@ -58,13 +57,22 @@ public class GameLogic {
     }
 
     private boolean checkMove(final String[] input){
+        boolean valid = false;
         Pair<String,Integer> move = new Pair<>(input[0],input.length-1);
         for(Pair<String,Integer> validMove : validMoves){
             if(validMove.equals(move)){
-                return true;
+                if(move.key.equals("MOVE")){
+                    if(map.getValidDirections().contains(input[1]) && input.length ==2){
+                        valid = true;
+                    }  
+                }
+                else{
+                    valid = true;
+                }
+               
             }
         }
-        return false;
+        return valid;
     }
 
     private void addValidMoves(){

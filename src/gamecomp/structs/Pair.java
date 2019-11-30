@@ -3,27 +3,27 @@ package gamecomp.structs;
 /**
  * Pair
  */
-public class Pair<F,S> {
-    public final F first;
-    public final S second;
+public class Pair<K,V> {
+    public final K key;
+    public final V value;
 
-    public Pair(F first, S second) {
-        this.first = first;
-        this.second = second;
+    public Pair(K key, V value) {
+        this.key = key;
+        this.value = value;
     }
     
-    public boolean equals(Pair<F,S> newPair){
-        if(this.first.equals(newPair.getF()) && this.second.equals(newPair.getS())){
+    public boolean equals(Pair<K,V> newPair){
+        if(this.key.equals(newPair.getK()) && this.value.equals(newPair.getV())){
             return true;
         }
         return false;
     }
 
-    public F getF(){
-        return first;
+    public K getK(){
+        return key;
     }
 
-    public S getS(){
-        return second;
+    public V getV(){
+        return value;
     }
 }
