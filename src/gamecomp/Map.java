@@ -1,4 +1,10 @@
 package gamecomp;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import gamecomp.structs.Pair;
+
 /**
  * Reads and contains in memory the map of the game.
  *
@@ -14,7 +20,7 @@ public class Map {
 	/* Gold required for the human player to win */
 	private int goldRequired;
 
-	private List<String> validDirections = new ArrayList<>();
+	private List<Pair<String,Pair<Integer,Integer>>> validDirections = new ArrayList<>();
 	
 	/**
 	 * Default constructor, creates the default map "Very small Labyrinth of doom".
@@ -42,7 +48,7 @@ public class Map {
 	 * @param : The filename of the map file.
 	 */
 	public Map(String fileName) {
-		addValidDirections();
+		setValidDirections();
 		readMap(fileName);
 	}
 
@@ -77,12 +83,15 @@ public class Map {
     protected void readMap(String fileName) {
     }
 
-	private setValidDirections(){
-
+	private void setValidDirections(){
+		validDirections.add(new Pair<>("N", new Pair<>(0,1)));
+		validDirections.add(new Pair<>("S", new Pair<>(0,-1)));
+		validDirections.add(new Pair<>("W", new Pair<>(-1,0)));
+		validDirections.add(new Pair<>("E", new Pair<>(1,0)));
 	}
 
-	private List<String> getValidDirections(){
-		
+	public List<Pair<String,Pair<Integer,Integer>>> getValidDirections(){
+		return validDirections;
 	}
 
 }
