@@ -17,8 +17,8 @@ public class GameLogic {
 	private final Map map;
     private final Display display;
     private final HumanPlayer player;
-
-    private List<Pair<String,Integer>> validMoves = new ArrayList<>();
+    private List<Pair<String,Pair<Integer,Integer>>> validDirections;
+    private List<Pair<String,Integer>> validMoves;
     
     
 	/**
@@ -28,21 +28,36 @@ public class GameLogic {
         map = new Map();
         display = new Display();  
         player = new HumanPlayer();
+        validMoves = new ArrayList<>();
+        validDirections = new ArrayList<>();
     }
     
     public void startGame(){
         display.startScreen();
         display.map(map.getMap());
-        addValidMoves();
+        setValidMoves();
+        setValidDirections();
         takeTurns();
     }
 
     private void takeTurns(){
-        getMove("Your Move... ");
+        boolean gameOver = false;
+        boolean playersTurn = true;
+        while(!gameOver){
+            if(playersTurn){
+                System.out.println("Your Move... ");
+                String[] args = getMove();
+                doMove(args);
+                playersTurn = false;
+            }
+            else{
+
+            }
+        }
+        
     }
 
-    private String[] getMove(final String movePrompt){
-        System.out.println(movePrompt);
+    private String[] getMove(){
         while(true){       
                 final String[] input = player.getInputFromConsole();
                 if(checkMove(input)){
@@ -60,7 +75,7 @@ public class GameLogic {
         for (final Pair<String, Integer> validMove : validMoves) {
             if(validMove.equals(move)){
                 if(move.key.equals("MOVE")){
-                    if(map.getValidDirections().contains(input[1])){
+                    if(getValidDirections().contains(input[1])){
                         valid = true;
                     }  
                 }
@@ -73,9 +88,41 @@ public class GameLogic {
         return valid;
     }
 
-    private void addValidMoves(){
+    private void doMove(String[] args){
+        switch (args[0]) {
+            case "HELLO": hello();       
+                break;
+            case "GOLD": gold();      
+                break;
+            case "MOVE": move(args[1].charAt(0));   
+                break;
+            case "PICKUP": pickup();        
+                break;
+            case "LOOK": look();
+                break;
+            case "QUIT": quitGame();
+                break;
+        }
+    }
+
+    private void setValidMoves(){
         validMoves.add(new Pair<>("MOVE",1));
         validMoves = Collections.unmodifiableList(validMoves);
+    }
+
+    private void setValidDirections(){
+		validDirections.add(new Pair<>("N", new Pair<>(0,1)));
+		validDirections.add(new Pair<>("S", new Pair<>(0,-1)));
+		validDirections.add(new Pair<>("W", new Pair<>(-1,0)));
+		validDirections.add(new Pair<>("E", new Pair<>(1,0)));
+    }
+    
+    private List<String> getValidDirections(){
+        List<String> directions = new ArrayList<>();
+		for(Pair<String,Pair<Integer,Integer>> direction : validDirections){
+			directions.add(direction.key);
+		}
+		return directions;
     }
 
     /**
