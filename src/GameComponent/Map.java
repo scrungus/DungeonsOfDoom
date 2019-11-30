@@ -1,4 +1,4 @@
-//package src;
+package GameComponent;
 /**
  * Reads and contains in memory the map of the game.
  *

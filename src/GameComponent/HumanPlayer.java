@@ -1,4 +1,4 @@
-//package src;
+package GameComponent;
 /**
  * Runs the game with a human player and contains code needed to read inputs.
  *
