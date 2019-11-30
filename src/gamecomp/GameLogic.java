@@ -1,13 +1,11 @@
 package gamecomp;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import gamecomp.display.Display;
+import gamecomp.player.HumanPlayer;
 import gamecomp.structs.Pair;
 
 /**
@@ -18,6 +16,7 @@ public class GameLogic {
 	
 	private final Map map;
     private final Display display;
+    private final HumanPlayer player;
 
     private List<Pair<String,Integer>> validMoves = new ArrayList<>();
     
@@ -28,41 +27,40 @@ public class GameLogic {
 	public GameLogic() {
         map = new Map();
         display = new Display();  
+        player = new HumanPlayer();
     }
     
     public void startGame(){
         display.startScreen();
         display.map(map.getMap());
         addValidMoves();
-        getMove("Your move : ");
+        takeTurns();
+    }
+
+    private void takeTurns(){
+        getMove("Your Move... ");
     }
 
     private String[] getMove(final String movePrompt){
-        final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println(movePrompt);
-        while(true){
-            try {
-                String line = reader.readLine();
-                line = line.trim().toUpperCase();
-                final String[] input = line.split(" ");
+        while(true){       
+                final String[] input = player.getInputFromConsole();
                 if(checkMove(input)){
                    return input;
                 }
                 else{
                     System.out.println("Enter a valid move : ");
                 }
-            } catch (final IOException e) {
-            }
         }
     }
 
     private boolean checkMove(final String[] input){
         boolean valid = false;
-        Pair<String,Integer> move = new Pair<>(input[0],input.length-1);
-        for(Pair<String,Integer> validMove : validMoves){
+        final Pair<String, Integer> move = new Pair<>(input[0], input.length - 1);
+        for (final Pair<String, Integer> validMove : validMoves) {
             if(validMove.equals(move)){
                 if(move.key.equals("MOVE")){
-                    if(map.getValidDirections().contains(input[1]) && input.length ==2){
+                    if(map.getValidDirections().contains(input[1])){
                         valid = true;
                     }  
                 }
@@ -76,8 +74,7 @@ public class GameLogic {
     }
 
     private void addValidMoves(){
-        Pair<String,Integer> move = new Pair<>("MOVE",1);
-        validMoves.add(move);
+        validMoves.add(new Pair<>("MOVE",1));
         validMoves = Collections.unmodifiableList(validMoves);
     }
 

@@ -1,4 +1,9 @@
 package gamecomp.player;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 /**
  * Runs the game with a human player and contains code needed to read inputs.
  *
@@ -10,8 +15,17 @@ public class HumanPlayer {
      * <p>
      * return : A string containing the input the player entered.
      */
-    protected String getInputFromConsole() {
-        return null;
+    public String[] getInputFromConsole(){
+        final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String[] input = {""};
+            try {
+                String line = reader.readLine();
+                line = line.trim().toUpperCase();
+                input = line.split(" ");
+            
+            } catch (IOException e) {
+            }
+        return input;
     }
 
     /**
