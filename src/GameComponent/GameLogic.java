@@ -1,4 +1,4 @@
-package GameComponent;
+package src.GameComponent;
 
 /**
  * Contains the main logic part of the game, as it processes.

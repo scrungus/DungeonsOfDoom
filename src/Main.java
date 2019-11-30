@@ -1,4 +1,6 @@
-import GameComponent.GameLogic;
+package src;
+
+import src.GameComponent.GameLogic;
 
 /**
  * Main

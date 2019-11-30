@@ -1,4 +1,4 @@
-package GameComponent;
+package src.GameComponent;
 /**
  * Reads and contains in memory the map of the game.
  *
