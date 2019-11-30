@@ -5,11 +5,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
-import javafx.util.Pair;
+import java.util.List;
 
 import gamecomp.display.Display;
-import jdk.internal.util.xml.impl.Pair;
-
+import gamecomp.structs.Pair;
 
 /**
  * Contains the main logic part of the game, as it processes.
@@ -19,6 +18,9 @@ public class GameLogic {
 	
 	private final Map map;
     private final Display display;
+
+    private List<Pair<String,Integer>> validMoves = new ArrayList<>();
+    
     
 	/**
 	 * Default constructor
@@ -32,6 +34,7 @@ public class GameLogic {
         display.startScreen();
         display.map(map.getMap());
         addValidMoves();
+        addValidDirections();
         getMove("Your move : ");
     }
 
@@ -55,12 +58,13 @@ public class GameLogic {
     }
 
     private boolean checkMove(final String[] input){
-        if(validMoves.contains(input[0].trim()) && input.length <= 2){
-            return true; 
+        Pair<String,Integer> move = new Pair<>(input[0],input.length-1);
+        for(Pair<String,Integer> validMove : validMoves){
+            if(validMove.equals(move)){
+                return true;
+            }
         }
-        else{
-            return false;
-        }
+        return false;
     }
 
     private void addValidMoves(){

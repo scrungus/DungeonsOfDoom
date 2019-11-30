@@ -13,11 +13,14 @@ public class Map {
 	
 	/* Gold required for the human player to win */
 	private int goldRequired;
+
+	private List<String> validDirections = new ArrayList<>();
 	
 	/**
 	 * Default constructor, creates the default map "Very small Labyrinth of doom".
 	 */
 	public Map() {
+		setValidDirections();
 		mapName = "Very small Labyrinth of Doom";
 		goldRequired = 2;
 		map = new char[][]{
@@ -39,6 +42,7 @@ public class Map {
 	 * @param : The filename of the map file.
 	 */
 	public Map(String fileName) {
+		addValidDirections();
 		readMap(fileName);
 	}
 
@@ -73,5 +77,12 @@ public class Map {
     protected void readMap(String fileName) {
     }
 
+	private setValidDirections(){
+
+	}
+
+	private List<String> getValidDirections(){
+		
+	}
 
 }
