@@ -114,10 +114,10 @@ public class GameLogic {
     }
 
     private void setValidDirections(){
-		validDirections.add(new Pair<>('N', new Pair<>(0,1)));
-		validDirections.add(new Pair<>('S', new Pair<>(0,-1)));
-		validDirections.add(new Pair<>('W', new Pair<>(-1,0)));
-		validDirections.add(new Pair<>('E', new Pair<>(1,0)));
+		validDirections.add(new Pair<>('N', new Pair<>(-1,0)));
+		validDirections.add(new Pair<>('S', new Pair<>(1,0)));
+		validDirections.add(new Pair<>('W', new Pair<>(0,-1)));
+		validDirections.add(new Pair<>('E', new Pair<>(0,1)));
     }
     
     private List<Character> getValidDirections(){
@@ -170,8 +170,8 @@ public class GameLogic {
                     return;
                 }
             }
-            display.message("FAILURE");
         }
+        display.message("FAILURE");
     }
 
     /**
