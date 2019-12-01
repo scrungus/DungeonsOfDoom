@@ -8,14 +8,14 @@ import java.io.InputStreamReader;
  * Runs the game with a human player and contains code needed to read inputs.
  *
  */
-public class HumanPlayer {
+public class Human extends Player {
 
     /**
      * Reads player's input from the console.
      * <p>
      * return : A string containing the input the player entered.
      */
-    public String[] getInputFromConsole(){
+    public String[] getInput(){
         final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String[] input = {""};
             try {
