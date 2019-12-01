@@ -4,8 +4,8 @@ package gamecomp.structs;
  * Pair
  */
 public class Pair<K,V> {
-    public final K key;
-    public final V value;
+    private final K key;
+    private final V value;
 
     public Pair(K key, V value) {
         this.key = key;
@@ -26,4 +26,5 @@ public class Pair<K,V> {
     public V getV(){
         return value;
     }
+
 }

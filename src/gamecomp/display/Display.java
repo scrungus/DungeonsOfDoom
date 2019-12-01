@@ -1,12 +1,19 @@
 package gamecomp.display;
 
 import java.io.File;
+import java.util.List;
 import java.util.Scanner;
-
+import gamecomp.structs.Pair;
 /**
  * Display
  */
 public class Display {
+
+    private List<Pair<String,Integer>> messages;
+    private String succ = "SUCCESS";
+    private String fail = "FAIL";
+    private String win = "WIN";
+    private String lose = "LOSE";
 
     public Display(){
     }
@@ -18,6 +25,10 @@ public class Display {
             }
             System.out.println();
         }
+    }
+
+    public void message(String type){
+        System.out.println(type);
     }
 
     public void startScreen(){

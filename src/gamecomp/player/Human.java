@@ -15,6 +15,9 @@ public class Human extends Player {
      * <p>
      * return : A string containing the input the player entered.
      */
+    private char playerSymbol = 'P';
+
+    @Override
     public String[] getInput(){
         final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String[] input = {""};
@@ -28,16 +31,21 @@ public class Human extends Player {
         return input;
     }
 
+    @Override
+    public char getPlayerSymbol() {
+        return playerSymbol;
+    }
+
     /**
      * Processes the command. It should return a reply in form of a String, as the protocol dictates.
      * Otherwise it should return the string "Invalid".
      *
      * @return : Processed output or Invalid if the @param command is wrong.
      */
-    public String getNextAction() {
-        return null;
-    }
 
+    /*I made the decision to move the getNextAction() method from the player class, as I don't think it is the players
+    *responsibility to process the command, rather it should be in GameLogic
+    */
 
 
 

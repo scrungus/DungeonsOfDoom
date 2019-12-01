@@ -18,7 +18,7 @@ public class GameLogic {
 	private final Map map;
     private final Display display;
     private final Player player;
-    private List<Pair<String,Pair<Integer,Integer>>> validDirections;
+    private List<Pair<Character,Pair<Integer,Integer>>> validDirections;
     private List<Pair<String,Integer>> validMoves;
     
     
@@ -49,11 +49,12 @@ public class GameLogic {
             if(playersTurn){
                 System.out.println("Your Move... ");
                 String[] args = getMove();
-                doMove(args);
+                doMove(player, args);
                 playersTurn = false;
             }
             else{
-
+                display.map(map.getMap());
+                playersTurn = true;
             }
         }
         
@@ -66,7 +67,7 @@ public class GameLogic {
                    return input;
                 }
                 else{
-                    System.out.println("Enter a valid move : ");
+                    display.message("ERROR");
                 }
         }
     }
@@ -76,8 +77,8 @@ public class GameLogic {
         final Pair<String, Integer> move = new Pair<>(input[0], input.length - 1);
         for (final Pair<String, Integer> validMove : validMoves) {
             if(validMove.equals(move)){
-                if(move.key.equals("MOVE")){
-                    if(getValidDirections().contains(input[1])){
+                if(move.getK().equals("MOVE")){
+                    if(getValidDirections().contains(input[1].charAt(0))){
                         valid = true;
                     }  
                 }
@@ -90,13 +91,13 @@ public class GameLogic {
         return valid;
     }
 
-    private void doMove(String[] args){
+    private void doMove(Player player, String[] args){
         switch (args[0]) {
             case "HELLO": hello();       
                 break;
             case "GOLD": gold();      
                 break;
-            case "MOVE": move(args[1].charAt(0));   
+            case "MOVE": move(player,args[1].charAt(0));   
                 break;
             case "PICKUP": pickup();        
                 break;
@@ -113,16 +114,16 @@ public class GameLogic {
     }
 
     private void setValidDirections(){
-		validDirections.add(new Pair<>("N", new Pair<>(0,1)));
-		validDirections.add(new Pair<>("S", new Pair<>(0,-1)));
-		validDirections.add(new Pair<>("W", new Pair<>(-1,0)));
-		validDirections.add(new Pair<>("E", new Pair<>(1,0)));
+		validDirections.add(new Pair<>('N', new Pair<>(0,1)));
+		validDirections.add(new Pair<>('S', new Pair<>(0,-1)));
+		validDirections.add(new Pair<>('W', new Pair<>(-1,0)));
+		validDirections.add(new Pair<>('E', new Pair<>(1,0)));
     }
     
-    private List<String> getValidDirections(){
-        List<String> directions = new ArrayList<>();
-		for(Pair<String,Pair<Integer,Integer>> direction : validDirections){
-			directions.add(direction.key);
+    private List<Character> getValidDirections(){
+        List<Character> directions = new ArrayList<>();
+		for(Pair<Character,Pair<Integer,Integer>> direction : validDirections){
+			directions.add(direction.getK());
 		}
 		return directions;
     }
@@ -160,8 +161,15 @@ public class GameLogic {
      * @param direction : The direction of the movement.
      * @return : Protocol if success or not.
      */
-    protected String move(final char direction) {
-        return null;
+    protected void move(Player player, char direction) {
+        for(Pair<Character,Pair<Integer,Integer>> directions : validDirections){
+            if(directions.getK().equals(direction)){
+                Pair<Integer,Integer> shift = directions.getV();
+                if(map.tryUpdateMap(player.getPlayerSymbol(),map.getNewLocation(player.getPlayerSymbol(),shift))){
+                    display.message("SUCCESS");
+                }
+            }
+        }
     }
 
     /**
