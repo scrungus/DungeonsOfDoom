@@ -1,5 +1,8 @@
 package gamecomp;
 
+import java.util.Random;
+
+import gamecomp.player.Human;
 import gamecomp.player.Player;
 
 /**
@@ -37,7 +40,25 @@ public class Map {
 	}
 
 	public void spawnPlayer(Player player){
-		
+		Random rand = new Random();
+		if(player instanceof Human){
+			while(true){
+				int lat = rand.nextInt(getWidth());
+				int longi = rand.nextInt(getHeight());
+				if(map[lat][longi] != '#' && map[lat][longi] != 'G'){
+					map[lat][longi] = 'P';
+					return;
+				}
+			}
+		}
+	}
+
+	private int getWidth(){
+		return map.length;
+	}
+
+	private int getHeight(){
+		return map[0].length;
 	}
 	
 	/**

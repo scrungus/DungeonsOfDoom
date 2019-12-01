@@ -35,6 +35,7 @@ public class GameLogic {
     
     public void startGame(){
         display.startScreen();
+        map.spawnPlayer(player);
         display.map(map.getMap());
         setValidMoves();
         setValidDirections();
