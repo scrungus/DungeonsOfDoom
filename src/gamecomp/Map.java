@@ -1,5 +1,7 @@
 package gamecomp;
 
+import gamecomp.player.Player;
+
 /**
  * Reads and contains in memory the map of the game.
  *
@@ -32,6 +34,10 @@ public class Map {
 		{'#','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','#'},
 		{'#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#'}
 		};
+	}
+
+	public void spawnPlayer(Player player){
+		
 	}
 	
 	/**

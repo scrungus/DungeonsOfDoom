@@ -5,7 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 import gamecomp.display.Display;
-import gamecomp.player.HumanPlayer;
+import gamecomp.player.Human;
+import gamecomp.player.Player;
 import gamecomp.structs.Pair;
 
 /**
@@ -16,7 +17,7 @@ public class GameLogic {
 	
 	private final Map map;
     private final Display display;
-    private final HumanPlayer player;
+    private final Player player;
     private List<Pair<String,Pair<Integer,Integer>>> validDirections;
     private List<Pair<String,Integer>> validMoves;
     
@@ -27,7 +28,7 @@ public class GameLogic {
 	public GameLogic() {
         map = new Map();
         display = new Display();  
-        player = new HumanPlayer();
+        player = new Human();
         validMoves = new ArrayList<>();
         validDirections = new ArrayList<>();
     }
@@ -59,7 +60,7 @@ public class GameLogic {
 
     private String[] getMove(){
         while(true){       
-                final String[] input = player.getInputFromConsole();
+                final String[] input = player.getInput();
                 if(checkMove(input)){
                    return input;
                 }

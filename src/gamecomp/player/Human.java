@@ -34,7 +34,7 @@ public class Human extends Player {
      *
      * @return : Processed output or Invalid if the @param command is wrong.
      */
-    protected String getNextAction() {
+    public String getNextAction() {
         return null;
     }
 

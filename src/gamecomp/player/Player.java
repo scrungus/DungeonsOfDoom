@@ -1,4 +1,4 @@
-package src.gamecomp.player;
+package gamecomp.player;
 
 /**
  * Player
