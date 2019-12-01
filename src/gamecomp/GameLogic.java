@@ -167,8 +167,10 @@ public class GameLogic {
                 Pair<Integer,Integer> shift = directions.getV();
                 if(map.tryUpdateMap(player.getPlayerSymbol(),map.getNewLocation(player.getPlayerSymbol(),shift))){
                     display.message("SUCCESS");
+                    return;
                 }
             }
+            display.message("FAILURE");
         }
     }
 
