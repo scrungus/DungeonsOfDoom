@@ -20,6 +20,7 @@ public class GameLogic {
     private final Player player;
     private List<Pair<Character,Pair<Integer,Integer>>> validDirections;
     private List<Pair<String,Integer>> validMoves;
+    private boolean playersTurn = true;
     
     
 	/**
@@ -44,16 +45,15 @@ public class GameLogic {
 
     private void takeTurns(){
         boolean gameOver = false;
-        boolean playersTurn = true;
         while(!gameOver){
             if(playersTurn){
-                System.out.println("Your Move... ");
+                System.out.println("Your Move : ");
                 String[] args = getMove();
                 doMove(player, args);
-                playersTurn = false;
             }
             else{
                 display.map(map.getMap());
+                display.message("Monsters move...");
                 playersTurn = true;
             }
         }
@@ -93,13 +93,13 @@ public class GameLogic {
 
     private void doMove(Player player, String[] args){
         switch (args[0]) {
-            case "HELLO": hello();       
+            case "HELLO": hello();      
                 break;
             case "GOLD": gold();      
                 break;
-            case "MOVE": move(player,args[1].charAt(0));   
+            case "MOVE": move(player,args[1].charAt(0)); playersTurn = false;   
                 break;
-            case "PICKUP": pickup();        
+            case "PICKUP": pickup(); playersTurn = false;       
                 break;
             case "LOOK": look(player);
                 break;
