@@ -5,7 +5,7 @@ package gamecomp.player;
  */
 public abstract class Player {
 
-    public char playerSymbol;
+    protected char playerSymbol;
 
     public abstract String[] getInput();
     public abstract char getPlayerSymbol();

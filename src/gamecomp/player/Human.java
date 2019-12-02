@@ -15,9 +15,11 @@ public class Human extends Player {
      * <p>
      * return : A string containing the input the player entered.
      */
-    private char playerSymbol = 'P';
     private int goldOwned = 0;
     
+    public Human(){
+        playerSymbol = 'P';
+    }
     /** 
      * @return String[]
      */
