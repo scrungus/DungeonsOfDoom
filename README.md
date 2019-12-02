@@ -32,9 +32,10 @@ Welcome to Dungeons Of Doom: The Video Game.
 6. Watch out for the Monster (B symbol) ...
 
 ## **Setup**
-- If on linux, install sox (in all major repos - optional),and run the script.sh file. Else, you will have to compile and run it yourself. From the root directory:
-```bash
-cd src
-javac **/*.java
+From the root directory : 
+-  If on linux, install sox (in all major repos - optional),and run the script.sh file. Else, you will have to compile and run it yourself. On Windows: 
+```bat
+dir /s /B *.java > sources.txt
+javac @sources.txt
 java Main
 ```
