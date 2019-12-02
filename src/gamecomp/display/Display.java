@@ -43,13 +43,13 @@ public class Display {
     public void message(String type){
         System.out.println(type);
     }
-    
+
     /** 
      * 
      */
     public void startScreen(){
         try {
-            Scanner input = new Scanner(new File("gamecomp/display/game_banner.txt"));
+            Scanner input = new Scanner(new File("gamecomp/display/Larry3D.txt"));
             while (input.hasNextLine()){
                 System.out.println(input.nextLine());
             }

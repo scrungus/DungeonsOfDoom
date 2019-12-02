@@ -21,6 +21,7 @@ public class GameLogic {
     private List<Pair<Character,Pair<Integer,Integer>>> validDirections;
     private List<Pair<String,Integer>> validMoves;
     private boolean playersTurn = true;
+    private boolean gameOver = false;
     
     
 	/**
@@ -50,7 +51,6 @@ public class GameLogic {
      * 
      */
     private void takeTurns(){
-        boolean gameOver = false;
         while(!gameOver){
             if(playersTurn){
                 System.out.println("Your Move : ");
@@ -63,7 +63,6 @@ public class GameLogic {
                 playersTurn = true;
             }
         }
-        
     }
 
     
@@ -123,7 +122,7 @@ public class GameLogic {
                 break;
             case "LOOK": look(player);
                 break;
-            case "QUIT": quitGame();
+            case "QUIT": quitGame(player);
                 break;
         }
     }
@@ -136,6 +135,7 @@ public class GameLogic {
         validMoves.add(new Pair<>("HELLO",0));
         validMoves.add(new Pair<>("GOLD",0));
         validMoves.add(new Pair<>("PICKUP",0));
+        validMoves.add(new Pair<>("QUIT",0));
         validMoves = Collections.unmodifiableList(validMoves);
     }
     //TODO: change setValidMoves to triples with their respective function call.
@@ -224,22 +224,32 @@ public class GameLogic {
      *
      * @return If the player successfully picked-up gold or not.
      */
-    protected String pickup(Player player) {
-        if(map.getCurrentTile(player) == 'G'){
-            map.setCurrentTile('.');
-            display.message("SUCCESS");
-        }
-        else{
-            display.message("FAIL");
-        }
-        return null;
+    protected void pickup(Player player) {
+        if(player instanceof Human){
+            if(map.getCurrentTile(player) == 'G'){
+                map.setCurrentTile('.');
+                ((Human)player).addGold(1);
+                display.message("SUCCESS");
+            }
+            else{
+                display.message("FAIL");
+            }
+        }     
     }
 
     /**
      * Quits the game, shutting down the application.
      */
-    protected void quitGame() {
-
+    protected void quitGame(Player player) {
+        if(player instanceof Human){
+            if(map.getCurrentTile(player) == 'E' && ((Human)player).getGoldOwned() == map.getGoldRequired()){
+                display.message("WIN");
+            }
+            else{
+                display.message("LOSE");
+            }
+            gameOver = true;
+        }
     }
 
 }
