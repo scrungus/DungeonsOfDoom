@@ -1,24 +1,25 @@
 package gamecomp.display;
 
 import java.io.File;
-import java.util.List;
+//import java.util.List;
 import java.util.Scanner;
-import gamecomp.structs.Pair;
+//import gamecomp.structs.Pair;
 /**
  * Display
  */
 public class Display {
-
+/*
     private List<Pair<String,Integer>> messages;
     private String succ = "SUCCESS";
     private String fail = "FAIL";
     private String win = "WIN";
     private String lose = "LOSE";
-
+*/
     public Display(){
     }
 
     public void map(char[][] map ){
+        System.out.println("printing map..");
         for(int i = 0; i < map.length;i++){
             for(int j = 0; j< map[i].length;j++){
                 System.out.print(map[i][j]);

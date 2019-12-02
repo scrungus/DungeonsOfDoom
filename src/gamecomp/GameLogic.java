@@ -101,7 +101,7 @@ public class GameLogic {
                 break;
             case "PICKUP": pickup();        
                 break;
-            case "LOOK": look();
+            case "LOOK": look(player);
                 break;
             case "QUIT": quitGame();
                 break;
@@ -110,6 +110,7 @@ public class GameLogic {
 
     private void setValidMoves(){
         validMoves.add(new Pair<>("MOVE",1));
+        validMoves.add(new Pair<>("LOOK",0));
         validMoves = Collections.unmodifiableList(validMoves);
     }
 
@@ -179,8 +180,8 @@ public class GameLogic {
      *
      * @return : A String representation of the game map.
      */
-    protected String look() {
-        return null;
+    protected void look(Player player){
+        display.map(map.getPlayerView(player.getPlayerSymbol()));
     }
 
     /**

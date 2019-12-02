@@ -12,6 +12,9 @@ public class Map {
 
 	/* Representation of the map */
 	private char[][] map;
+
+	private int PLAYER_VIEW = 2;
+	private int LOOK_SIZE = 5;
 	
 	/* Map name */
 	private String mapName;
@@ -65,6 +68,38 @@ public class Map {
 			return true;
 		}
 		return false;
+	}
+
+	public char[][] getPlayerView(char playerSymbol){
+		char[][] playerview = new char[LOOK_SIZE][LOOK_SIZE];
+		int k,l; k=l=0;
+		Pair<Integer,Integer> location= findSymbol(playerSymbol);
+		System.out.println("location : "+location.getK()+" "+location.getV());
+		Pair<Integer,Integer> heightPoints = new Pair<Integer,Integer>(location.getK()-PLAYER_VIEW,location.getK()+PLAYER_VIEW);
+		Pair<Integer,Integer> widthPoints = new Pair<Integer,Integer>(location.getV()-PLAYER_VIEW,location.getV()+PLAYER_VIEW);
+		System.out.println("height : "+heightPoints.getK()+" "+heightPoints.getV());
+		System.out.println("width : "+widthPoints.getK()+" "+widthPoints.getV());
+		for(int i = heightPoints.getK();i<= heightPoints.getV();i++){
+			System.out.println("i : "+i);
+			for(int j = widthPoints.getK();j<= widthPoints.getV();j++){
+				System.out.println("j : "+j);
+				if(map.length > i && map[0].length > j && (i >=0 && j >=0)){
+					System.out.println("true");
+					System.out.println("map height and width : "+ map.length + " " + map[0].length);
+					System.out.println("k and l : " +k+ " "+ l);
+					playerview[k][l] = map[i][j];
+				}
+				else{
+					System.out.println("wall");
+					System.out.println("k and l : " +k+ " "+ l);
+					playerview[k][l] = '#';
+				}
+				l++;
+			}
+			l = 0;
+			k++;
+		}
+		return playerview;
 	}
 
 	private int getWidth(){
