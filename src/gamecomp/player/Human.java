@@ -1,4 +1,4 @@
-package gamecomp.player;
+`package gamecomp.player;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,6 +17,10 @@ public class Human extends Player {
      */
     private char playerSymbol = 'P';
 
+    
+    /** 
+     * @return String[]
+     */
     @Override
     public String[] getInput(){
         final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -31,6 +35,10 @@ public class Human extends Player {
         return input;
     }
 
+    
+    /** 
+     * @return char
+     */
     @Override
     public char getPlayerSymbol() {
         return playerSymbol;

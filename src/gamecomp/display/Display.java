@@ -8,6 +8,10 @@ import java.util.Scanner;
  * Display
  */
 public class Display {
+
+/** 
+ * @return 
+ */
 /*
     private List<Pair<String,Integer>> messages;
     private String succ = "SUCCESS";
@@ -15,9 +19,14 @@ public class Display {
     private String win = "WIN";
     private String lose = "LOSE";
 */
+
     public Display(){
     }
 
+    
+    /** 
+     * @param map
+     */
     public void map(char[][] map ){
         for(int i = 0; i < map.length;i++){
             for(int j = 0; j< map[i].length;j++){
@@ -27,10 +36,17 @@ public class Display {
         }
     }
 
+    
+    /** 
+     * @param type
+     */
     public void message(String type){
         System.out.println(type);
     }
-
+    
+    /** 
+     * 
+     */
     public void startScreen(){
         try {
             Scanner input = new Scanner(new File("gamecomp/display/game_banner.txt"));

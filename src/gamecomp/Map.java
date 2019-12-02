@@ -45,6 +45,10 @@ public class Map {
 		};
 	}
 
+	
+	/** 
+	 * @param player
+	 */
 	public void spawnPlayer(Player player){
 		Random rand = new Random();
 			while(true){
@@ -60,6 +64,12 @@ public class Map {
 			}
 		}		
 
+	
+	/** 
+	 * @param symbol
+	 * @param location
+	 * @return boolean
+	 */
 	public boolean tryUpdateMap(char symbol, Pair<Integer,Integer> location){
 		if(map[location.getK()][location.getV()] != '#'){
 			playerNextPosition = new Pair<>(map[location.getK()][location.getV()],new Pair<>(location.getK(),location.getV()));
@@ -78,6 +88,11 @@ public class Map {
 		return false;
 	}
 
+	
+	/** 
+	 * @param playerSymbol
+	 * @return char[][]
+	 */
 	public char[][] getPlayerView(char playerSymbol){
 		char[][] playerview = new char[LOOK_SIZE][LOOK_SIZE];
 		int k,l; k=l=0;
@@ -101,14 +116,27 @@ public class Map {
 		return playerview;
 	}
 
+	
+	/** 
+	 * @return int
+	 */
 	private int getWidth(){
 		return map.length-1;
 	}
 
+	
+	/** 
+	 * @return int
+	 */
 	private int getHeight(){
 		return map[0].length-1;
 	}
 	
+	
+	/** 
+	 * @param symbol
+	 * @return Pair<Integer, Integer>
+	 */
 	public Pair<Integer,Integer> findSymbol(char symbol){
 		for(int i = 0; i < map.length;i++){
             for(int j = 0; j< map[i].length;j++){
@@ -120,6 +148,12 @@ public class Map {
 		return null;
 	}
 
+	
+	/** 
+	 * @param symbol
+	 * @param shift
+	 * @return Pair<Integer, Integer>
+	 */
 	public Pair<Integer,Integer> getNewLocation(char symbol, Pair<Integer,Integer> shift){
 		Pair<Integer,Integer> location= findSymbol(symbol);
 		return new Pair<Integer,Integer>(location.getK()+shift.getK(),location.getV()+shift.getV());

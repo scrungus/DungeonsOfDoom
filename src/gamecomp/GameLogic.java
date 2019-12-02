@@ -34,6 +34,9 @@ public class GameLogic {
         validDirections = new ArrayList<>();
     }
     
+     /** 
+     * 
+     */
     public void startGame(){
         display.startScreen();
         map.spawnPlayer(player);
@@ -43,6 +46,9 @@ public class GameLogic {
         takeTurns();
     }
 
+    /** 
+     * 
+     */
     private void takeTurns(){
         boolean gameOver = false;
         while(!gameOver){
@@ -60,6 +66,10 @@ public class GameLogic {
         
     }
 
+    
+    /** 
+     * @return String[]
+     */
     private String[] getMove(){
         while(true){       
                 final String[] input = player.getInput();
@@ -72,6 +82,11 @@ public class GameLogic {
         }
     }
 
+    
+    /** 
+     * @param input
+     * @return boolean
+     */
     private boolean checkMove(final String[] input){
         boolean valid = false;
         final Pair<String, Integer> move = new Pair<>(input[0], input.length - 1);
@@ -91,6 +106,11 @@ public class GameLogic {
         return valid;
     }
 
+    
+    /** 
+     * @param player
+     * @param args
+     */
     private void doMove(Player player, String[] args){
         switch (args[0]) {
             case "HELLO": hello();      
@@ -107,13 +127,19 @@ public class GameLogic {
                 break;
         }
     }
-
+     /** 
+     * 
+     */
     private void setValidMoves(){
         validMoves.add(new Pair<>("MOVE",1));
         validMoves.add(new Pair<>("LOOK",0));
+        validMoves.add(new Pair<>("HELLO",0));
         validMoves = Collections.unmodifiableList(validMoves);
     }
 
+    /** 
+     * 
+     */
     private void setValidDirections(){
 		validDirections.add(new Pair<>('N', new Pair<>(-1,0)));
 		validDirections.add(new Pair<>('S', new Pair<>(1,0)));
@@ -121,6 +147,10 @@ public class GameLogic {
 		validDirections.add(new Pair<>('E', new Pair<>(0,1)));
     }
     
+    
+    /** 
+     * @return List<Character>
+     */
     private List<Character> getValidDirections(){
         List<Character> directions = new ArrayList<>();
 		for(Pair<Character,Pair<Integer,Integer>> direction : validDirections){
@@ -143,8 +173,8 @@ public class GameLogic {
 	 *
      * @return : Gold required to win.
      */
-    protected String hello() {
-        return null;
+    protected void hello() {
+        display.message("Gold Required : "+map.getGoldRequired());
     }
 	
 	/**
