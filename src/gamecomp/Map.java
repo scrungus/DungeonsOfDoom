@@ -15,6 +15,7 @@ public class Map {
 
 	private int PLAYER_VIEW = 2;
 	private int LOOK_SIZE = 5;
+	private boolean spawned = false;
 	
 	/* Map name */
 	private String mapName;
@@ -50,8 +51,9 @@ public class Map {
 				int lat = rand.nextInt(getWidth());
 				int longi = rand.nextInt(getHeight());
 				if(map[lat][longi] != 'G'){
-					symbolPosition = new Pair<>(map[lat][longi],new Pair<>(lat,longi));
+					//symbolPosition = new Pair<>(map[lat][longi],new Pair<>(lat,longi));
 					if(tryUpdateMap(player.getPlayerSymbol(),new Pair<Integer,Integer>(lat,longi))){
+						spawned = true;
 						return;
 					}
 				} 
@@ -61,10 +63,16 @@ public class Map {
 	public boolean tryUpdateMap(char symbol, Pair<Integer,Integer> location){
 		if(map[location.getK()][location.getV()] != '#'){
 			playerNextPosition = new Pair<>(map[location.getK()][location.getV()],new Pair<>(location.getK(),location.getV()));
-			Pair<Integer,Integer> player = findSymbol(symbol);
-			map[player.getK()][player.getV()] = symbolPosition.getK();
-			map[location.getK()][location.getV()] = symbol;
-			symbolPosition = playerNextPosition;		
+			if(!spawned){
+				symbolPosition = new Pair<>(map[location.getK()][location.getV()],new Pair<>(location.getK(),location.getV()));
+				map[location.getK()][location.getV()] = symbol;
+			}
+			else{
+				Pair<Integer,Integer> player = findSymbol(symbol);
+				map[player.getK()][player.getV()] = symbolPosition.getK();
+				map[location.getK()][location.getV()] = symbol;
+				symbolPosition = playerNextPosition;
+			}			
 			return true;
 		}
 		return false;
@@ -74,24 +82,15 @@ public class Map {
 		char[][] playerview = new char[LOOK_SIZE][LOOK_SIZE];
 		int k,l; k=l=0;
 		Pair<Integer,Integer> location= findSymbol(playerSymbol);
-		System.out.println("location : "+location.getK()+" "+location.getV());
 		Pair<Integer,Integer> heightPoints = new Pair<Integer,Integer>(location.getK()-PLAYER_VIEW,location.getK()+PLAYER_VIEW);
 		Pair<Integer,Integer> widthPoints = new Pair<Integer,Integer>(location.getV()-PLAYER_VIEW,location.getV()+PLAYER_VIEW);
-		System.out.println("height : "+heightPoints.getK()+" "+heightPoints.getV());
-		System.out.println("width : "+widthPoints.getK()+" "+widthPoints.getV());
+
 		for(int i = heightPoints.getK();i<= heightPoints.getV();i++){
-			System.out.println("i : "+i);
 			for(int j = widthPoints.getK();j<= widthPoints.getV();j++){
-				System.out.println("j : "+j);
 				if(map.length > i && map[0].length > j && (i >=0 && j >=0)){
-					System.out.println("true");
-					System.out.println("map height and width : "+ map.length + " " + map[0].length);
-					System.out.println("k and l : " +k+ " "+ l);
 					playerview[k][l] = map[i][j];
 				}
 				else{
-					System.out.println("wall");
-					System.out.println("k and l : " +k+ " "+ l);
 					playerview[k][l] = '#';
 				}
 				l++;
@@ -103,11 +102,11 @@ public class Map {
 	}
 
 	private int getWidth(){
-		return map.length;
+		return map.length-1;
 	}
 
 	private int getHeight(){
-		return map[0].length;
+		return map[0].length-1;
 	}
 	
 	public Pair<Integer,Integer> findSymbol(char symbol){
@@ -118,7 +117,7 @@ public class Map {
 				}
 			}
 		}
-		return new Pair<Integer,Integer>(0,0);
+		return null;
 	}
 
 	public Pair<Integer,Integer> getNewLocation(char symbol, Pair<Integer,Integer> shift){
