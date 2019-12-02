@@ -115,11 +115,11 @@ public class GameLogic {
         switch (args[0]) {
             case "HELLO": hello();      
                 break;
-            case "GOLD": gold();      
+            case "GOLD": gold(player);      
                 break;
             case "MOVE": move(player,args[1].charAt(0)); playersTurn = false;   
                 break;
-            case "PICKUP": pickup(); playersTurn = false;       
+            case "PICKUP": pickup(player); playersTurn = false;       
                 break;
             case "LOOK": look(player);
                 break;
@@ -134,8 +134,11 @@ public class GameLogic {
         validMoves.add(new Pair<>("MOVE",1));
         validMoves.add(new Pair<>("LOOK",0));
         validMoves.add(new Pair<>("HELLO",0));
+        validMoves.add(new Pair<>("GOLD",0));
+        validMoves.add(new Pair<>("PICKUP",0));
         validMoves = Collections.unmodifiableList(validMoves);
     }
+    //TODO: change setValidMoves to triples with their respective function call.
 
     /** 
      * 
@@ -182,8 +185,10 @@ public class GameLogic {
 	 *
      * @return : Gold currently owned.
      */
-    protected String gold() {
-        return null;
+    protected void gold(Player player) {
+        if(player instanceof Human){
+            display.message("Gold owned : "+((Human)player).getGoldOwned());
+        }   
     }
 
     /**
@@ -219,7 +224,14 @@ public class GameLogic {
      *
      * @return If the player successfully picked-up gold or not.
      */
-    protected String pickup() {
+    protected String pickup(Player player) {
+        if(map.getCurrentTile(player) == 'G'){
+            map.setCurrentTile('.');
+            display.message("SUCCESS");
+        }
+        else{
+            display.message("FAIL");
+        }
         return null;
     }
 

@@ -1,4 +1,4 @@
-`package gamecomp.player;
+package gamecomp.player;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,7 +16,7 @@ public class Human extends Player {
      * return : A string containing the input the player entered.
      */
     private char playerSymbol = 'P';
-
+    private int goldOwned = 0;
     
     /** 
      * @return String[]
@@ -42,6 +42,14 @@ public class Human extends Player {
     @Override
     public char getPlayerSymbol() {
         return playerSymbol;
+    }
+
+    public int getGoldOwned(){
+        return goldOwned;
+    }
+
+    public void addGold(int gold){
+        goldOwned+=gold;
     }
 
     /**

@@ -1,6 +1,7 @@
 package gamecomp;
 import java.util.Random;
 
+import gamecomp.player.Human;
 import gamecomp.player.Player;
 import gamecomp.structs.Pair;
 
@@ -87,6 +88,11 @@ public class Map {
 		}
 		return false;
 	}
+	//TODO: adapt tryUpdateMap to be able to do setCurrentTile 
+
+	public void setCurrentTile(char symbol){
+		symbolPosition = new Pair<>(symbol,symbolPosition.getV());
+	}
 
 	
 	/** 
@@ -132,6 +138,14 @@ public class Map {
 		return map[0].length-1;
 	}
 	
+	public char getCurrentTile(Player player){
+		if (player instanceof Human){
+			return symbolPosition.getK();
+		}
+		else{
+			return 'e';
+		}
+	}
 	
 	/** 
 	 * @param symbol
